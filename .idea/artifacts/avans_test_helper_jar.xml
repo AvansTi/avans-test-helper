@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="avans-test-helper:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/avans_test_helper_jar</output-path>
+    <root id="archive" name="avans-test-helper.jar">
+      <element id="module-output" name="avans-test-helper" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
