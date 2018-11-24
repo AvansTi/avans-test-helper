@@ -93,6 +93,24 @@ public class TestHelper {
 		return out;
 	}
 
+	public static String[] callMain(String className)
+	{
+		Reflex.ClassRef<Object> clazz = Reflex.reflect(className);
+
+		MockStdio io = new MockStdio();
+		io.enable();
+		try {
+			clazz.staticMethod("main").returningVoid().taking(String[].class).invoke(null);
+		} catch (Throwable throwable) {
+			throwable.printStackTrace();
+			assertTrue("Error running method", false);
+		}
+
+		String[] out = io.getSysOut().split("\n");
+		io.disable();
+		return out;
+	}
+
 	public static void testContains(String[] lines, String text)
 	{
 		boolean contains = false;
@@ -102,6 +120,10 @@ public class TestHelper {
 		assertTrue("Output should contain " + text + ", but this text was not found. Your output was:\n" + String.join("\n", lines), contains);
 	}
 
+	public static ContainOrderTester testContains(String[] lines)
+	{
+		return new ContainOrderTester(lines);
+	}
 
 
 }
