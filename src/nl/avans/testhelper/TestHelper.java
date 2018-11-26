@@ -120,6 +120,18 @@ public class TestHelper {
 		assertTrue("Output should contain " + text + ", but this text was not found. Your output was:\n" + String.join("\n", lines), contains);
 	}
 
+	/**
+	 * Test if the class inherits a specific interface
+	 * @param className subclass name
+	 * @param implInterface Interface class
+	 */
+	public static void testInterface(String className, Class implInterface) {
+		Reflex.ClassRef<Object> clazz = Reflex.reflect(className);
+
+		assertTrue("Class " + className + " should implement interface " + implInterface.getName(), clazz.inherits(implInterface));
+
+	}
+
 	public static ContainOrderTester testContains(String[] lines)
 	{
 		return new ContainOrderTester(lines);
