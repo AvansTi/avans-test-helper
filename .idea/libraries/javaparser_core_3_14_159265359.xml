@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="javaparser-core-3.14.159265359">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/javaparser-core-3.14.159265359.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

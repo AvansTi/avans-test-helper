@@ -11,5 +11,6 @@
     <orderEntry type="library" name="edu-test-utils-0.4.2" level="project" />
     <orderEntry type="library" name="junit-4.11" level="project" />
     <orderEntry type="library" name="hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" name="javaparser-core-3.14.159265359" level="project" />
   </component>
 </module>

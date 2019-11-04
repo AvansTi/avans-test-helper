@@ -1,9 +1,10 @@
 package nl.avans.testhelper;
 
-import com.sun.deploy.util.ReflectionUtil;
 import fi.helsinki.cs.tmc.edutestutils.MockStdio;
 import fi.helsinki.cs.tmc.edutestutils.ReflectionUtils;
 import fi.helsinki.cs.tmc.edutestutils.Reflex;
+import nl.avans.testhelper.parser.Parser;
+import org.junit.Assert;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -76,10 +77,15 @@ public class TestHelper {
 	}
 	public static String[] callVoidMethod(String className, String methodName, Object object)
 	{
+		return callVoidMethod(className, methodName, object, "");
+	}
+	public static String[] callVoidMethod(String className, String methodName, Object object, String input)
+	{
 		Reflex.ClassRef<Object> clazz = Reflex.reflect(className);
 
 		MockStdio io = new MockStdio();
 		io.enable();
+		io.setSysIn(input);
 		try {
 			clazz.method(methodName).returningVoid().takingNoParams().invokeOn(object);
 		} catch (Throwable throwable) {
@@ -233,6 +239,16 @@ public class TestHelper {
 		field.setAccessible(accessable);
 	}
 
+	public static void testAttributeExists(String className, String attributeName)
+	{
+		Class<?> clazz = ReflectionUtils.findClass(className);
+		Field[] fields = clazz.getDeclaredFields();
+		boolean found = false;
+		for(Field field : fields)
+			if(field.getName().equals(attributeName))
+				found = true;
+		Assert.assertTrue("Class " + className + " does not have an attribute called " + attributeName, found);
+	}
 
 
 	public static Field getAttribute(String className, String attributeName, Class type)
@@ -269,6 +285,11 @@ public class TestHelper {
 		if(string.length() <= 1)
 			return string.toUpperCase();
 		return string.substring(0, 1).toUpperCase() + string.substring(1);
+	}
+
+	public static Parser parser()
+	{
+		return new Parser();
 	}
 
 
